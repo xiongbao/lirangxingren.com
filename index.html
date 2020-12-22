@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>礼让行人</title>
+    <link rel="icon" type="image/png" href="assets/images/icon.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="assets/images/app-icon.png">
+    <link rel="apple-touch-icon" type="image/png" href="assets/images/app-icon.png">
+    <style>
+        body {
+            margin: 0;
+            background-color: #fff;
+            background-image: url(assets/images/pattern-bg.png);
+            background-position: 0 0;
+            color: #34343E;
+        }
+        header {
+            padding: 100px 0 60px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 68px;
+            background-image: url(assets/images/logo.svg);
+            background-size: auto 85%;
+            background-repeat: no-repeat;
+            background-position: 0 50%;
+            color: transparent;
+            position: relative;
+        }
+        h1::after,
+        h1::before{
+            position: absolute;
+            right: 100%;
+            bottom: 0;
+            color: initial;
+            margin-right: 20px;
+        }
+        h1::before {
+            content: '\1F6B6';
+            z-index: 1;
+            font-size: 60px;
+        }
+        h1::after {
+            content: '\1F698';
+            top: 0;
+        }
+        h1 + p {font-size: 18px;letter-spacing: 1px;}
+        .wrap {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        article {
+            margin: 5px 0 0;
+        }
+        video {
+            width: 100%;
+            vertical-align: top;
+            object-fit: cover;
+        }
+        video::-webkit-media-controls-timeline,
+        video::-webkit-media-controls-mute-button {
+            display: none;
+        }
+        footer {
+            text-align: center;
+            color: #878b99;
+        }
+        @media screen and (max-width:640px) and (orientation: portrait) {
+            header {
+                padding-bottom: 40px;
+            }
+            h1 {
+                font-size: 48px;
+                background-position: 50% 50%;
+            }
+            h1::after,
+            h1::before {
+                left: 50%;
+                right: auto;
+                top: auto;
+                bottom: 100%;
+                transform: translateX(-50%);
+                display: block;
+                margin-right: 0;
+            }
+            h1 + p {
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+<header>
+    <h1>礼让行人</h1>
+    <p>礼让一小步，文明一大步；让道于人，安全于己。<br/>知荣明耻崇尚文明，守法礼让平安出行。</p>
+</header>
+<section>
+{{range $val := .Files "/videos"}}
+    {{$ext := $.Ext $val}}
+    {{if eq $ext ".mp4"}}
+        {{$fileName := $.StripExt $val}}
+        <article>
+            <video poster="/videos/cover/{{$fileName}}.jpg" controlslist="nodownload" disablePictureInPicture oncontextmenu = "return false" muted controls webkit-playsinline playsinline src="/videos/{{$val}}"></video>
+        </article>
+    {{end}}
+{{end}}
+</section>
+<footer>
+    <p>&copy; 2020 lirangxingren.com</p>
+</footer>
+</div>
+</body>
+</html> 
