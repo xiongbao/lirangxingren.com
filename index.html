@@ -106,7 +106,7 @@
     {{if eq $ext ".mp4"}}
         {{$fileName := $.StripExt $val}}
         <article>
-            <video poster="/videos/cover/{{$fileName}}.jpg" controlslist="nodownload" disablePictureInPicture oncontextmenu = "return false" muted controls webkit-playsinline playsinline src="/videos/{{$val}}"></video>
+            <video preload="none" poster="/videos/cover/{{$fileName}}.jpg" controlslist="nodownload" disablePictureInPicture oncontextmenu="return false" muted controls webkit-playsinline playsinline src="/videos/{{$val}}"></video>
         </article>
     {{end}}
 {{end}}
